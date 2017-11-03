@@ -1,5 +1,5 @@
 # pika_electron
-//for basic angular2
+## for basic angular2
 
 "raw-loader": "^0.5.1",
 
@@ -14,13 +14,13 @@
 "angular2-template-loader": "^0.6.2",
 
 
-//for live load
+## for live load
 
 "html-webpack-plugin": "^2.30.1",
 
 "webpack-dev-server": "^2.9.4"
 
-//html template and css preprocess
+## html template and css preprocess
 
 "css-loader": "^0.28.7",
 
