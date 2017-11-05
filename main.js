@@ -1,3 +1,4 @@
+"use strict"
 const electron = require('electron');
 const app  = electron.app;
 const BrowserWindow  = electron.BrowserWindow;
@@ -44,18 +45,17 @@ app.on('window-all-closed', function() {
 // initialization and ready for creating browser windows.
 app.on('ready', function() {
   //set menu
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
+  // const menu = Menu.buildFromTemplate(template);
+  // Menu.setApplicationMenu(menu);
 
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 1024, height: 768});
 
   // and load the index.html of the app.
   mainWindow.webContents.session.setProxy({}, function () {
-    mainWindow.loadURL('http://localhost:8888');
+    // mainWindow.loadURL('file://' + __dirname + '/dist/index.html');
+    mainWindow.loadURL("http://localhost:8888"); 
   });
-  //mainwindow.loadurl('file://' + __dirname + '/src/index.html');
-  //mainwindow.loadurl("http://github.com");
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

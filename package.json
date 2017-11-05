@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "Angular2+ demo like twitter",
   "scripts": {
-    "webpack": "webpack --config ./webpack.config.js --bail --progress",
-    "dev-server": "webpack-dev-server --config ./webpack.config.js --progress --open",
+    "webpack_dev": "webpack --config ./webpack_dev.config.js --bail --progress",
+    "webpack": "webpack --config ./webpack_release.config.js --bail --progress",
+    "dev-server": "webpack-dev-server --config ./webpack_dev.config.js --progress --open",
     "server": "static-server ./src",
     "start": "npm run dev-server",
-    "aaa": "npm run webpack && npm run server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dist": "npm run webpack && npm run server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "package": "electron-packager . test --platform=win32 --arch=x64 --electron-version=1.7.9 --overwrite --out=./output --ignore=src --ignore=node_modules --ignore=.gitignore"
   },
   "main": "main.js",
   "dependencies": {

@@ -1,13 +1,31 @@
 const HtmlPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
+const nodeModulesDir = path.resolve(__dirname, '/node_modules');
+const DLL_VENDORS = [
+  '@angular/animations',
+  '@angular/common',
+  '@angular/compiler',
+  '@angular/core',
+  '@angular/forms',
+  '@angular/http',
+  '@angular/platform-browser',
+  '@angular/platform-browser-dynamic',
+  '@angular/platform-server',
+  '@angular/router',
+  'core-js',
+  'rxjs',
+  'zone.js'
+]
 module.exports = {
   entry: {
-    'app': './src/main.ts'
+    'app': './src/main.ts',
+    vendors: [...DLL_VENDORS] // And other vendors
   },
-
+  devtool: "cheap-module-eval-source-map",
   output: {
-    path: '/home/pikachien/pika_electron/angular-twitter/dist',
-    filename: 'main.bundle.js'
+    path: __dirname + '/dist',
+    filename: '[name].js'
   },
 
   resolve: {
@@ -39,7 +57,9 @@ module.exports = {
     new HtmlPlugin({
       // 指定index.html的模板文件路径
       template: path.resolve(__dirname, './dist/index.html')
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin({name : 'vendors', filename : 'vendors.js'}),
+    new webpack.optimize.UglifyJsPlugin({minimize: true})
   ],
   devServer: {
     historyApiFallback: true, // 404将会重定向至index.html
